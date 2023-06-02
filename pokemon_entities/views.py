@@ -54,7 +54,7 @@ def show_all_pokemons(request):
                 'img_url': request.build_absolute_uri(pokemon.photo.url)
                 if pokemon.photo
                 else '',
-                'title_ru': pokemon.title,
+                'title_ru': pokemon.title_ru,
             }
         )
 
@@ -75,7 +75,9 @@ def show_pokemon(request, pokemon_id):
         'img_url': request.build_absolute_uri(requested_pokemon.photo.url)
         if requested_pokemon.photo
         else '',
-        'title_ru': requested_pokemon.title,
+        'title_ru': requested_pokemon.title_ru,
+        'title_en': requested_pokemon.title_en,
+        'title_jp': requested_pokemon.title_jp,
         'description': requested_pokemon.description,
     }
 
