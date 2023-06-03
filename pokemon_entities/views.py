@@ -90,6 +90,18 @@ def show_pokemon(request, pokemon_id):
             if requested_pokemon.photo
             else '',
         }
+    descendants = requested_pokemon.pokemon_set.all()
+    if descendants:
+        descendant = descendants[0]
+        pokemon['next_evolution'] = {
+            'pokemon_id': descendant.id,
+            'title_ru': descendant.title_ru,
+            'img_url': request.build_absolute_uri(
+                descendant.photo.url
+            )
+            if descendant.photo
+            else '',
+        }
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon_entity in requested_pokemon.pokemonentity_set.all():
