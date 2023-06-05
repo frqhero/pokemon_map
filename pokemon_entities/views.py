@@ -36,7 +36,7 @@ def show_all_pokemons(request):
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon in pokemons:
-        for pokemon_entity in pokemon.pokemonentity_set.filter(
+        for pokemon_entity in pokemon.pokemon_entities.filter(
             appeared_at__lte=now, disappeared_at__gt=now
         ):
             add_pokemon(
@@ -90,7 +90,7 @@ def show_pokemon(request, pokemon_id):
             if requested_pokemon.photo
             else '',
         }
-    descendants = requested_pokemon.pokemon_set.all()
+    descendants = requested_pokemon.pokemons.all()
     if descendants:
         descendant = descendants[0]
         pokemon['next_evolution'] = {
@@ -104,7 +104,7 @@ def show_pokemon(request, pokemon_id):
         }
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-    for pokemon_entity in requested_pokemon.pokemonentity_set.all():
+    for pokemon_entity in requested_pokemon.pokemon_entities.all():
         add_pokemon(
             folium_map,
             pokemon_entity.lat,
