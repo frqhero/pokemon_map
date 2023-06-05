@@ -50,7 +50,7 @@ def show_all_pokemons(request):
                 'pokemon_id': pokemon.id,
                 'img_url': request.build_absolute_uri(pokemon.photo.url)
                 if pokemon.photo
-                else '',
+                else DEFAULT_IMAGE_URL,
                 'title_ru': pokemon.title_ru,
             }
         )
@@ -71,7 +71,7 @@ def show_pokemon(request, pokemon_id):
         'pokemon_id': requested_pokemon.id,
         'img_url': request.build_absolute_uri(requested_pokemon.photo.url)
         if requested_pokemon.photo
-        else '',
+        else DEFAULT_IMAGE_URL,
         'title_ru': requested_pokemon.title_ru,
         'title_en': requested_pokemon.title_en,
         'title_jp': requested_pokemon.title_jp,
@@ -85,7 +85,7 @@ def show_pokemon(request, pokemon_id):
                 requested_pokemon.previous_evolution.photo.url
             )
             if requested_pokemon.photo
-            else '',
+            else DEFAULT_IMAGE_URL,
         }
     descendants = requested_pokemon.pokemons.all()
     if descendants:
@@ -97,7 +97,7 @@ def show_pokemon(request, pokemon_id):
                 descendant.photo.url
             )
             if descendant.photo
-            else '',
+            else DEFAULT_IMAGE_URL,
         }
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
