@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db import models  # noqa F401
-from django.utils.timezone import now
 
 
 class Pokemon(models.Model):
@@ -18,7 +17,7 @@ class Pokemon(models.Model):
         blank=True,
         null=True,
         verbose_name='Из кого эволюционировал',
-        related_name='pokemons'
+        related_name='descendants'
     )
 
     def __str__(self):

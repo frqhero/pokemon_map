@@ -87,7 +87,7 @@ def show_pokemon(request, pokemon_id):
             if requested_pokemon.photo
             else DEFAULT_IMAGE_URL,
         }
-    descendant = requested_pokemon.pokemons.first()
+    descendant = requested_pokemon.descendants.first()
     if descendant:
         pokemon['next_evolution'] = {
             'pokemon_id': descendant.id,
